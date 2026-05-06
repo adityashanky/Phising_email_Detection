@@ -1,0 +1,21 @@
+text,label
+"Your account has been suspended. Click here to verify your identity.",phishing
+"Dear customer, we need to update your payment information immediately.",phishing
+"Submit your password now to avoid service interruption.",phishing
+"Your package delivery is delayed. Confirm your address.",phishing
+"Please find the invoice attached for your recent order.",phishing
+"Your bank account has unusual activity. Verify your login now.",phishing
+"We noticed a problem with your payment method. Update your billing details.",phishing
+"This is a final notice. Your account will close if you do not respond.",phishing
+"A secure message is waiting for you. Access it through this link.",phishing
+"Congratulations! You have won a prize. Claim it by clicking here.",phishing
+"Meeting agenda for Monday attached. Let me know if you have questions.",legitimate
+"Can we reschedule the demo to Wednesday afternoon?",legitimate
+"Your subscription renewal is confirmed. Thank you for using our service.",legitimate
+"Quarterly report is ready for review. Please check the shared folder.",legitimate
+"Team lunch is planned for Friday at noon. RSVP if you can join.",legitimate
+"Thanks for your payment. Your invoice is attached and the receipt is confirmed.",legitimate
+"The project status update is ready. Please review the attached notes.",legitimate
+"Happy birthday! Enjoy your special offer from our rewards program.",legitimate
+"Please see the updated travel itinerary for your conference schedule.",legitimate
+"Your password change request has been completed successfully.",legitimate

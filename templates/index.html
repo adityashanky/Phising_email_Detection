@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Phishing Email Detector</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 2rem; background: #f4f7fb; }
+      .container { max-width: 700px; margin: 0 auto; background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 8px 30px rgba(20,20,50,0.08); }
+      textarea { width: 100%; min-height: 180px; padding: 0.75rem; border-radius: 5px; border: 1px solid #ccd0d5; font-size: 1rem; }
+      button { background: #2563eb; color: #fff; border: none; padding: 0.85rem 1.25rem; border-radius: 5px; font-size: 1rem; cursor: pointer; }
+      .message { margin-top: 1rem; padding: 1rem; border-radius: 5px; }
+      .success { background: #ecfdf5; color: #166534; }
+      .error { background: #fef2f2; color: #991b1b; }
+      .explanation { margin-top: 1rem; padding: 1rem; background: #f9fafb; border-radius: 6px; border: 1px solid #d1d5db; }
+      .explanation h2 { margin-top: 0; }
+      .feature-block { display: inline-block; width: 48%; vertical-align: top; }
+      .feature-block h3 { margin-bottom: 0.5rem; }
+      .feature-block ul { padding-left: 1.25rem; margin-top: 0.25rem; }
+      .feature-block li { margin-bottom: 0.25rem; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Phishing Email Detector</h1>
+      <p>Paste the email text below and click Analyze.</p>
+
+      {% if error %}
+      <div class="message error">{{ error }}</div>
+      {% endif %}
+
+      {% if result %}
+      <div class="message success">
+        <strong>Prediction:</strong> {{ result }}<br />
+        <strong>Confidence:</strong> {{ confidence }}
+      </div>
+      {% endif %}
+
+      {% if explanation %}
+      <div class="explanation">
+        <h2>Why the model made this prediction</h2>
+        <div class="feature-block">
+          <h3>Phishing signals</h3>
+          <ul>
+            {% for item in explanation.positive %}
+            <li>{{ item.feature }} ({{ item.score | round(3) }})</li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="feature-block">
+          <h3>Legitimate signals</h3>
+          <ul>
+            {% for item in explanation.negative %}
+            <li>{{ item.feature }} ({{ item.score | round(3) }})</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endif %}
+
+      <form method="post" action="/predict">
+        <textarea name="email_text" placeholder="Enter email content here...">{{ email_text or '' }}</textarea>
+        <div style="margin-top: 1rem; text-align: right;">
+          <button type="submit">Analyze Email</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
