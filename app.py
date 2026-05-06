@@ -12,10 +12,18 @@ st.set_page_config(page_title="Phishing Email Detector", page_icon="🛡️")
 
 @st.cache_resource
 def load_model():
+    # Check if model exists 
     if not os.path.exists(MODEL_PATH):
-        st.error("Model artifacts not found. Please run `python train.py` first.")
-        return None
-    return joblib.load(MODEL_PATH)
+        st.info("Model not found. Initializing training...")
+        try:
+            # This runs train.py as a separate process 
+            subprocess.run(["python", "train.py"], check=True)
+            st.success("Model trained successfully!")
+        except Exception as e:
+            st.error(f"Failed to train model: {e}")
+            return None
+            
+    return joblib.load(MODEL_PATH) [cite: 1]
 
 def explain_prediction(model, text, top_n=4):
     features_step = model.named_steps["features"]
